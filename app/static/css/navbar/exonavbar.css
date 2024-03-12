@@ -1,0 +1,61 @@
+#wallet-details {
+    position: absolute;
+    right: 12px;
+    top: 55px;
+    z-index: 3;
+    padding: 5px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+}
+
+.navbar-burger {
+	position: relative;
+}
+
+@media screen and (min-width: 1024px)  {
+.navbar-burger {
+    display: block;
+}
+
+}
+#navbar-menu-id {
+	height: 40px;
+}
+
+#navbar-menu-container-id {
+	margin-top: 7px;
+	flex-grow: 1;
+	position: relative;
+	height: 60px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	display: none;
+}
+
+#exonavbar-id {
+	height: 64px;
+	display: flex;
+	flex-direction: row-reverse;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 5000;
+	max-width: 98%;
+	}
+
+#more {
+	position: absolute;
+	right: 0px;
+	top: 50px;
+}
+
+#more p + p {
+	margin-top: 10px;
+}
+
+#navbar-menu-container-id {
+	overflow: visible;
+}

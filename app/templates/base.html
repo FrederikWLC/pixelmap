@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block title %}
+    <title>Pixel Map</title>
+    {% endblock %}
+    <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <meta charset="utf-8">
+    <meta name="Frederik Christoffersen" content="CTW">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/f1bf187213.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma-timeline@3.0.4/dist/css/bulma-timeline.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wallet.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block head %}{% endblock %}
+  </head>
+  <body {% if noscroll %}class="noscroll"{% endif %}>
+    <div id="loader"></div>
+  <div id="page" style="display:none;">
+    {% if navbar %}
+        {% include "navbar/navbar.html" %}
+    {% elif exonavbar %}
+        {% include "navbar/exonavbar.html" %}
+    {% endif %}
+    <div id="flash-container">
+    <div id="flash"><p class="text has-text-centered"></p></div>
+    </div>
+    {% if background %}
+    <section class="hero is-info is-bold is-fullheight">
+    <div class="hero-body" id="background">
+    {% elif frame %}
+    <section class="hero is-info is-bold is-fullheight">
+    <div class="hero-body">
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    {% if footer %}
+    {% include "footer.html" %}
+    {% endif %}
+
+    {% if background or frame %}
+  </div>
+</section>
+    {% endif %}
+    </div>
+    <div id="modal-box">{% block modal %}{% endblock %}</div>
+    <script type="text/javascript">
+
+        function freezeScroller() {
+            var scrollPosition = window.pageYOffset;
+            console.log(scroll);
+            $('#page').css({'top': -scrollPosition + 'px'});
+            $(document.body).addClass('noscroll');
+            $(document.body).attr('prev-scroll',scrollPosition);
+        }
+
+        function unfreezeScroller() {
+            console.log("OISDO");
+            if ($(document.body).hasClass('noscroll')) {
+                console.log("does have class");
+                $(document.body).removeClass('noscroll');
+                $('html').scrollTop($(document.body).attr('prev-scroll'));
+                console.log($(document.body).attr('prev-scroll'));
+                $('#page').css({'top': 0});
+                $(document.body).removeAttr('prev-scroll');
+            }
+        }
+
+       
+        function infoLoader() {
+            return `{% include 'info-loader.html' %}`;
+        }
+
+        function noResults() {
+            return `{% include 'no-results.html' %}`;
+        }
+        // fix this below function!
+        {% if request.url_rule.endpoint in ['comms.feedback', 'comms.feedback_post']  %}
+        function paginationBar() {
+             return `{% include 'comms/feedback/basic-pagination.html' %}`;
+        }
+        {% endif %}
+        
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wallet.js') }}"></script>
+    {% if navbar %}
+        <script src="{{ url_for('static', filename='js/navbar/navbar.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar/navbar.css') }}">
+    {% elif exonavbar %}
+        <script src="{{ url_for('static', filename='js/navbar/exonavbar.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar/exonavbar.css') }}">
+    {% endif %}
+    {% if navbar or exonavbar %}
+    <script src="{{ url_for('static', filename='js/navbar/more.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar/wallet-details.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar/navbar-contents.css') }}">
+    {% endif %}
+    {% block scripts %}{% endblock %}
+      </body>
+</html>

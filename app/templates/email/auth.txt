@@ -1,0 +1,12 @@
+Hi {{ user.username }},
+
+To activate your account click on the following link:
+
+{{         https://www.hashtag.com
+ }}
+
+If you have not created a user, simply ignore this message.
+
+See you online,
+
+The Pixel Map Team

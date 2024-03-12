@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Pixel Map</title>
+{% endblock %}
+{% block content %}
+<section class="hero is-info is-fullheight" style="background-image: linear-gradient(to bottom right, navy,deepskyblue);">
+  <div class="hero-body">
+  	<div id="first-thing" class="columns">
+  	
+    <div id="title-column" class="column" style="min-height: 100%;height: 100%; ">
+      <p class="title is-1 is-spaced" style="white-space: nowrap;
+">  
+
+  Blockchain-based <br> Map of pixels <br> for the world to paint.
+
+      </p>
+      <p class="subtitle">
+        From real life recruitments to coffee meeting groups - this is a land of opportunities. Connect, create, and collaborate. Meet your future partners today. <b><a href="/register/">Join our platform now! <u>Sign up</u></a></b>
+      </p>
+    </div>
+  <div class="column"><a href="/map/"><div id="map"></a></div><p class="title" style="display:inline;">Explore</p><p class="subtitle" style="display:inline;"> — Take a look at our interactive map and explore the world of entrepreneurship. Whether you're looking for an actress or an engineer, our network's got you covered.</p></div>
+</div>
+</div>
+</section>
+<section class="section hero">
+  <div class="hero-body" style="max-width: 1080px; margin: auto; padding:0px;">
+  <h1 class="title is-2 is-spaced"><i>The</i> meeting place</h1>
+  <h2 class="subtitle">
+    As a promising online meeting platform, <strong>Pixel Map World</strong> seeks to provide <strong>entrepreneurs</strong> and likeminded with a <strong>flexible network</strong> as a tool to realise their <strong>ideas</strong> with.
+  </h2>
+  <div class="columns" style="margin: auto;">
+      <div class="column">
+         <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+              </figure>
+            </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">Frederik Walther Liberoth Christoffersen</p>
+                <p class="subtitle is-6">@frederik</p>
+              </div>
+            </div>
+
+            <div class="content">
+              The developer behind it all.
+           </div>
+        </div>
+      </div>
+      </div>
+      <div class="column">
+        <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">Adrian</p>
+            <p class="subtitle is-6">@theo</p>
+          </div>
+        </div>
+
+        <div class="content">
+          The wise grown-up with real life experience. Currently researching the field of decentralized finance.
+        </div>
+      </div>
+    </div>
+      </div>
+</div>
+</div>
+</section>
+{% endblock %}
+{% block scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+setTimeout(function(){ 
+	map.invalidateSize();
+
+},250)});
+         var map = L.map('map', { zoomControl: false }).setView([55.676111, 12.568333], 13);
+         
+         //CartoDB layer names: light_all / dark_all / light_nonames / dark_nonames
+         layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png', {
+            subdomains: 'abcd',
+            maxZoom: 10,
+            minZoom: 2,
+         }).addTo(map);
+         map.attributionControl.setPrefix('');
+
+         $(document).on('click','#map', function(){
+         	window.location.href = "/map/";
+         });
+</script>
+<style type="text/css">
+
+#map {
+	height: 100%;
+	min-height: 250px;
+	opacity: 90%;
+	cursor: pointer;
+
+}
+
+.leaflet-container{
+    border-radius: 12px;
+    }
+
+    div.media-content {
+      overflow: hidden;
+    }
+
+#first-thing.columns {
+  margin: auto;
+  margin-top: 100px;
+}
+
+.title.is-1.is-spaced {
+font-size:  6vw !important;
+}
+
+
+@media screen and (max-width: 768px) {
+
+
+  #first-thing.columns {
+  margin-top: 50px;
+}
+
+.title.is-1.is-spaced {
+     font-size: 46px !important;
+  }
+}
+
+@media screen and (max-width: 420.6px) {
+  .title.is-1.is-spaced {
+     font-size: 10vw !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+    .title.is-1.is-spaced {
+      font-size: 72px !important;
+  }
+  div.columns {
+    max-width:  1220px !important;
+  }
+
+  
+
+}
+
+</style>
+{% endblock %}

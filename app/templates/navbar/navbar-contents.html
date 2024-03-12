@@ -1,0 +1,9 @@
+{% if request.url_rule.endpoint != 'main.settings' %}
+<p class="control">
+  <a class="button transition {% if class %}{{class}}{% endif %}" id="wallet-button" data-status="closed">
+    <span class="icon">
+      <i class="fas fa-wallet"></i>
+    </span>
+  </a>
+</p>
+{% endif %}
